@@ -1,12 +1,13 @@
 # Javascript snippet
+
 ```
 async function query(data) {
 	const response = await fetch(
 		"https://xevhza5rhd1jhkq8.us-east-1.aws.endpoints.huggingface.cloud",
 		{
-			headers: { 
+			headers: {
 				"Accept" : "application/json",
-				"Content-Type": "application/json" 
+				"Content-Type": "application/json"
 			},
 			method: "POST",
 			body: JSON.stringify(data),
@@ -23,15 +24,16 @@ query({
 	console.log(JSON.stringify(response));
 });
 ```
- 
+
 # Python snippet
+
 ```
 import requests
 
 API_URL = "https://xevhza5rhd1jhkq8.us-east-1.aws.endpoints.huggingface.cloud"
 headers = {
 	"Accept" : "application/json",
-	"Content-Type": "application/json" 
+	"Content-Type": "application/json"
 }
 
 def query(payload):
