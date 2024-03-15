@@ -1,10 +1,22 @@
 const chatForm = get("form");
 const chatInput = get("input");
 const chatBox = get("main");
+
 appendMessage(
   "bot",
-  "Hi, I am an AI bot here to help you ! Please tell me about your symptoms"
+  "Hi, I am an AI bot here to help you find out what kind of help is best suited for you!"
 );
+
+currQuestion = "Firstly, please tell me about your symptoms";
+
+appendMessage("bot", currQuestion);
+
+var counter = 0;
+
+nextQuestionPrompt = "The following questions have been asked to a patient:\n";
+nextQuestionPrompt += "Question: " + currQuestion + "\n";
+
+refinedPromt = "";
 
 chatForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -12,13 +24,33 @@ chatForm.addEventListener("submit", (event) => {
   if (!text) return;
 
   appendMessage("user", text);
-
   appendMessage("bot", "Thinking ...");
-  //Message envoyer par le user.
-  queryAPI(text).then((response) => {
-    appendMessage("bot", response);
-  });
 
+  if (counter < 3) {
+    nextQuestionPrompt += "Response:" + text + "\n";
+    var query =
+      nextQuestionPrompt +
+      "What is a good follow up question to better understand the situation ?";
+
+    //Questions
+
+    console.log(query);
+
+    queryAPI(query).then((response) => {
+      appendMessage("bot", response);
+      currQuestion = response;
+      nextQuestionPrompt += "Question: " + response;
+    });
+  } else {
+    nextQuestionPrompt += "What should a doctor respond to that patient ?";
+    console.log(nextQuestionPrompt);
+    //Message envoyer par le user.
+    queryAPI(nextQuestionPrompt).then((response) => {
+      appendMessage("bot", response);
+    });
+  }
+
+  counter += 1;
   chatInput.value = "";
 });
 
