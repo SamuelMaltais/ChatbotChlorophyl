@@ -26,6 +26,7 @@ chatForm.addEventListener("submit", (event) => {
   if (!text) return;
 
   appendMessage("user", text);
+  nextQuestionPrompt += "Response:" + text + "\n";
 
   if (questionSequence && counter < 5) {
     if (questions.length != 0) {
@@ -40,7 +41,6 @@ chatForm.addEventListener("submit", (event) => {
     }
   } else {
     if (counter < 3) {
-      nextQuestionPrompt += "Response:" + text + "\n";
       var query =
         nextQuestionPrompt +
         "What is a good follow up question to better understand the situation ?";
@@ -59,7 +59,7 @@ chatForm.addEventListener("submit", (event) => {
         }
       });
     } else {
-      nextQuestionPrompt += "What should a doctor respond to that patient ?";
+      nextQuestionPrompt += "As a doctor, what would you recommand?";
       console.log(nextQuestionPrompt);
       //Message envoyer par le user.
       queryAPI(nextQuestionPrompt).then((response) => {
