@@ -1,7 +1,10 @@
 const chatForm = get("form");
 const chatInput = get("input");
 const chatBox = get("main");
-appendMessage("bot", "Hi ! Please tell me about your symptoms");
+appendMessage(
+  "bot",
+  "Hi, I am an AI bot here to help you ! Please tell me about your symptoms"
+);
 
 chatForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -10,10 +13,10 @@ chatForm.addEventListener("submit", (event) => {
 
   appendMessage("user", text);
 
+  appendMessage("bot", "Thinking ...");
   //Message envoyer par le user.
   queryAPI(text).then((response) => {
-    appendMessage("bot", "Query was successfull");
-    appendMessage("bot", "Response from bot: " + JSON.stringify(response));
+    appendMessage("bot", response);
   });
 
   chatInput.value = "";

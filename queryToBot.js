@@ -1,6 +1,4 @@
 async function queryAPI(userText) {
-  var data = userText;
-
   data = {
     inputs: userText,
     parameters: {},
@@ -16,6 +14,10 @@ async function queryAPI(userText) {
       body: JSON.stringify(data),
     }
   );
+
   const result = await response.json();
-  return result;
+
+  console.log(result);
+
+  return result[0]["generated_text"];
 }
