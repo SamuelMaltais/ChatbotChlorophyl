@@ -1,5 +1,3 @@
-import queryAPI from "./queryToBot";
-
 const chatForm = get("form");
 const chatInput = get("input");
 const chatBox = get("main");
@@ -11,8 +9,11 @@ chatForm.addEventListener("submit", (event) => {
   if (!text) return;
 
   appendMessage("user", text);
-  queryAPI().then(() => {
-    appendMessage("bot", "This is a bot bubble");
+
+  //Message envoyer par le user.
+  queryAPI(text).then((r) => {
+    appendMessage("bot", "Query was successfull");
+    appendMessage("bot", "Response from bot: " + r);
   });
 
   chatInput.value = "";
