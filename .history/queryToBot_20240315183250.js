@@ -1,10 +1,4 @@
-async function queryAPI(userText) {
-  var data = userText;
-
-  data = {
-    inputs: userText,
-    parameters: {},
-  };
+export default async function queryAPI() {
   const response = await fetch(
     "https://xevhza5rhd1jhkq8.us-east-1.aws.endpoints.huggingface.cloud",
     {

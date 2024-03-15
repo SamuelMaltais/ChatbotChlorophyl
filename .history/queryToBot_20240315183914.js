@@ -1,10 +1,12 @@
 async function queryAPI(userText) {
   var data = userText;
 
-  data = {
-    inputs: userText,
+  query({
+    inputs: "This is the text sent to the model",
     parameters: {},
-  };
+  }).then((response) => {
+    console.log(JSON.stringify(response));
+  });
   const response = await fetch(
     "https://xevhza5rhd1jhkq8.us-east-1.aws.endpoints.huggingface.cloud",
     {

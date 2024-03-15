@@ -13,7 +13,7 @@ chatForm.addEventListener("submit", (event) => {
   //Message envoyer par le user.
   queryAPI(text).then((response) => {
     appendMessage("bot", "Query was successfull");
-    appendMessage("bot", "Response from bot: " + JSON.stringify(response));
+    appendMessage("bot", "Response from bot: " + JSON.stringify(response);
   });
 
   chatInput.value = "";

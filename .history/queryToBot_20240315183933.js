@@ -1,8 +1,8 @@
 async function queryAPI(userText) {
   var data = userText;
 
-  data = {
-    inputs: userText,
+  body = {
+    inputs: "This is the text sent to the model",
     parameters: {},
   };
   const response = await fetch(
