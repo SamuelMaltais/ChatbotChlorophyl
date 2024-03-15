@@ -12,6 +12,8 @@ currQuestion = "Firstly, please tell me about your symptoms";
 appendMessage("bot", currQuestion);
 
 var counter = 0;
+var questionSequence = 0;
+var questions = [];
 
 nextQuestionPrompt = "The following questions have been asked to a patient:\n";
 nextQuestionPrompt += "Question: " + currQuestion + "\n";
@@ -24,34 +26,50 @@ chatForm.addEventListener("submit", (event) => {
   if (!text) return;
 
   appendMessage("user", text);
-  appendMessage("bot", "Thinking ...");
 
-  if (counter < 3) {
-    nextQuestionPrompt += "Response:" + text + "\n";
-    var query =
-      nextQuestionPrompt +
-      "What is a good follow up question to better understand the situation ?";
+  if (questionSequence && counter < 5) {
+    if (questions.length != 0) {
+      currQuestion = questions.pop();
+      nextQuestionPrompt += "Question: " + currQuestion + "\n";
+      appendMessage("bot", currQuestion);
+      counter += 1;
+    }
 
-    //Questions
-
-    console.log(query);
-
-    queryAPI(query).then((response) => {
-      appendMessage("bot", response);
-      currQuestion = response;
-      nextQuestionPrompt += "Question: " + response;
-    });
+    if (questions.length == 0) {
+      questionSequence = 0;
+    }
   } else {
-    nextQuestionPrompt += "What should a doctor respond to that patient ?";
-    console.log(nextQuestionPrompt);
-    //Message envoyer par le user.
-    queryAPI(nextQuestionPrompt).then((response) => {
-      appendMessage("bot", response);
-    });
-  }
+    if (counter < 3) {
+      nextQuestionPrompt += "Response:" + text + "\n";
+      var query =
+        nextQuestionPrompt +
+        "What is a good follow up question to better understand the situation ?";
 
-  counter += 1;
-  chatInput.value = "";
+      //Questions
+
+      console.log(query);
+      appendMessage("bot", "Thinking ...");
+      queryAPI(query).then((response) => {
+        questions = treatQuestions(response);
+        console.log(questions);
+        if (questions.length != 0) {
+          currQuestion = questions.pop();
+          nextQuestionPrompt += "Question: " + currQuestion + "\n";
+          appendMessage("bot", currQuestion);
+        }
+      });
+    } else {
+      nextQuestionPrompt += "What should a doctor respond to that patient ?";
+      console.log(nextQuestionPrompt);
+      //Message envoyer par le user.
+      queryAPI(nextQuestionPrompt).then((response) => {
+        appendMessage("bot", response);
+      });
+    }
+
+    counter += 1;
+    chatInput.value = "";
+  }
 });
 
 function appendMessage(side, text) {
