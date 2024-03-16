@@ -43,7 +43,7 @@ async function generateFinalResponse(nextQuestionPrompt, appendMessage) {
 
   prompt =
     nextQuestionPrompt +
-    "As a doctor, what would you recommand that patient do ?";
+    "As a doctor, what would you recommand that patient do ? Speak as if you were speaking to that patient.";
 
   console.log(prompt);
 
