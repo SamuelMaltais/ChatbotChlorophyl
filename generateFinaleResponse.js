@@ -22,6 +22,27 @@ async function generateFinalResponse(nextQuestionPrompt, appendMessage) {
 
   prompt =
     nextQuestionPrompt +
+    "Is this situation extremely urgent ? Respond with either yes or no";
+  console.log(prompt);
+
+  queryAPI(prompt).then((response) => {
+    if (response == "yes" || "Yes") {
+      appendMessage(
+        "bot",
+        "Nous pensons qu'il s'agit d'une situation extremement urgente"
+      );
+    } else if (response == "no" || "Yes") {
+      appendMessage(
+        "bot",
+        "Cette situation ne semple pas être extremement urgente."
+      );
+    } else {
+      appendMessage("bot", response);
+    }
+  });
+
+  prompt =
+    nextQuestionPrompt +
     "As a doctor, what would you recommand that patient do ?";
 
   console.log(prompt);
