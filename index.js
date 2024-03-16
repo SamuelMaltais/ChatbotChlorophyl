@@ -40,7 +40,7 @@ chatForm.addEventListener("submit", (event) => {
       questionSequence = 0;
     }
   } else {
-    if (counter < 3) {
+    if (counter < 2) {
       var query =
         nextQuestionPrompt +
         "What is a good follow up question to better understand the situation ?";
@@ -60,12 +60,6 @@ chatForm.addEventListener("submit", (event) => {
         }
       });
     } else {
-      nextQuestionPrompt += "As a doctor, what would you recommand?";
-      console.log(nextQuestionPrompt);
-      //Message envoyer par le user.
-      queryAPI(nextQuestionPrompt).then((response) => {
-        appendMessage("bot", response);
-      });
     }
 
     counter += 1;
