@@ -2,9 +2,10 @@ async function queryAPI(userText) {
   data = {
     inputs: userText,
     parameters: {
-      min_length: 100,
-      top_k: 1,
+      wait_for_model: true,
       temperature: 0.4,
+      top_k: 1,
+      max_new_tokens: 10000,
     },
   };
   const response = await fetch(

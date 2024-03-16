@@ -1,11 +1,7 @@
 async function queryAPI(userText) {
   data = {
     inputs: userText,
-    parameters: {
-      min_length: 100,
-      top_k: 1,
-      temperature: 0.4,
-    },
+    parameters: {},
   };
   const response = await fetch(
     "https://xevhza5rhd1jhkq8.us-east-1.aws.endpoints.huggingface.cloud",
