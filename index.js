@@ -53,6 +53,7 @@ chatForm.addEventListener("submit", (event) => {
         questions = treatQuestions(response);
         console.log(questions);
         if (questions.length != 0) {
+          questionSequence = 1;
           currQuestion = questions.pop();
           nextQuestionPrompt += "Question: " + currQuestion + "\n";
           appendMessage("bot", currQuestion);
