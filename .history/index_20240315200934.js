@@ -60,7 +60,6 @@ chatForm.addEventListener("submit", (event) => {
         }
       });
     } else {
-      //generateFinaleResponse();
     }
 
     counter += 1;

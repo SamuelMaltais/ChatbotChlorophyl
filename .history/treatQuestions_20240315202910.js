@@ -1,7 +1,8 @@
 function treatQuestions(questions) {
   var arr = [];
-  var way1 = questions.split("Question: ");
+  var way1 = questions.split("\nQuestion: ");
   if (way1.length != 0) {
+    return way1;
   }
 
   for (var i = 0; i < way1.length; i++) {

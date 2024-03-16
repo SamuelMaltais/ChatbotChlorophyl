@@ -5,20 +5,11 @@ async function queryAPI(userText) {
       min_length: 100,
       top_k: 1,
       temperature: 0.4,
-      wait_for_model: true,
     },
   };
-  var counter = 0;
-  var result = [
-    {
-      generated_text: "",
-    },
-  ];
-  while (result[0]["generated_text"] == "") {
+  var result = "";
+  while (result == "" || result == undefined) {
     console.log("fetching");
-    if (counter == 5) {
-      return "I'm sorry, please try again.";
-    }
     response = await fetch(
       "https://xevhza5rhd1jhkq8.us-east-1.aws.endpoints.huggingface.cloud",
       {
@@ -34,7 +25,6 @@ async function queryAPI(userText) {
     result = await response.json();
 
     console.log(result);
-    counter += 1;
   }
 
   return result[0]["generated_text"];

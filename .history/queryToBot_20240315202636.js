@@ -5,7 +5,6 @@ async function queryAPI(userText) {
       min_length: 100,
       top_k: 1,
       temperature: 0.4,
-      wait_for_model: true,
     },
   };
   var counter = 0;

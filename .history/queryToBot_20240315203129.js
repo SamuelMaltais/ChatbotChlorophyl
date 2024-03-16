@@ -2,7 +2,7 @@ async function queryAPI(userText) {
   data = {
     inputs: userText,
     parameters: {
-      min_length: 100,
+      min_length: 900,
       top_k: 1,
       temperature: 0.4,
       wait_for_model: true,
